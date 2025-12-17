@@ -4,7 +4,7 @@ function App() {
   const [message, setMessage] = useState("Loading...");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api")
+    fetch("api")
       .then(res => res.json())
       .then(data => setMessage(data.message))
       .catch(() => setMessage("⚠️ Failed to fetch backend"));
