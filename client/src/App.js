@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [message, setMessage] = useState("Loading...");
   const [addStatus, setAddStatus] = useState("");
+  const [section, setSection] = useState("Seccion A");
 
   useEffect(() => {
     fetch("https://flask-backend-1a0n.onrender.com/api")
@@ -18,7 +19,7 @@ function App() {
   const handleAddModel = async () => {
     const randomString = generateRandomString();
     setAddStatus("Adding...");
-    
+
     try {
       await fetch(`https://flask-backend-1a0n.onrender.com/add/${randomString}`);
       setAddStatus(`✓ Added: ${randomString}`);
@@ -41,21 +42,20 @@ function App() {
         <div className="mb-4 inline-flex items-center justify-center bg-white/10 px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm border border-white/10">
           🔌 Connected to Flask Backend: <span className="ml-2 text-green-400">{message}</span>
         </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-loose">
-            <span className="block text-white pb-3">Deploy Your</span>
-            <span
-              style={{ fontFamily: 'Pacifico, cursive' }}
-              className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text text-5xl sm:text-6xl md:text-7xl pb-8"
-            >
-              Flask + React App
-            </span>
-          </h1>
-        <p className="text-gray-400 text-lg">
-          Build powerful full-stack apps with Flask and React. Deploy effortlessly on Vercel with zero server stress.
-        </p>
-        
+
         {/* Add Model Button */}
         <div className="mt-8">
+          <div className="mb-4 inline-block text-left">
+            <label className="block text-sm text-gray-300 mb-1">Sección</label>
+            <select
+              value={section}
+              onChange={(e) => setSection(e.target.value)}
+              className="bg-white/5 text-white px-3 py-2 rounded-md border border-white/10"
+            >
+              <option>Seccion A</option>
+              <option>Seccion B</option>
+            </select>
+          </div>
           <button
             onClick={handleAddModel}
             className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transform transition hover:scale-105"
