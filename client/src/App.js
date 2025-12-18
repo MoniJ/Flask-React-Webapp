@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [message, setMessage] = useState("Loading...");
+  const [addStatus, setAddStatus] = useState("");
 
   useEffect(() => {
     fetch("https://flask-backend-1a0n.onrender.com/api")
@@ -9,6 +10,24 @@ function App() {
       .then(data => setMessage(data.message))
       .catch(() => setMessage("⚠️ Failed to fetch backend"));
   }, []);
+
+  const generateRandomString = () => {
+    return Math.random().toString(36).substring(2, 15);
+  };
+
+  const handleAddModel = async () => {
+    const randomString = generateRandomString();
+    setAddStatus("Adding...");
+    
+    try {
+      await fetch(`https://flask-backend-1a0n.onrender.com/add/${randomString}`);
+      setAddStatus(`✓ Added: ${randomString}`);
+      setTimeout(() => setAddStatus(""), 3000);
+    } catch (error) {
+      setAddStatus("✗ Failed to add");
+      setTimeout(() => setAddStatus(""), 3000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
@@ -34,6 +53,19 @@ function App() {
         <p className="text-gray-400 text-lg">
           Build powerful full-stack apps with Flask and React. Deploy effortlessly on Vercel with zero server stress.
         </p>
+        
+        {/* Add Model Button */}
+        <div className="mt-8">
+          <button
+            onClick={handleAddModel}
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transform transition hover:scale-105"
+          >
+            Add Random Model
+          </button>
+          {addStatus && (
+            <p className="mt-3 text-sm text-gray-300">{addStatus}</p>
+          )}
+        </div>
       </div>
     </div>
   );
