@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for, jsonify
 
-from .extensions import db
-from .models import Test
+from extensions import db
+from models import Test
 
 main = Blueprint('main', __name__)
 
