@@ -24,7 +24,6 @@ def api_index():
 @main.route("/api/vins", methods=['GET'])
 def get_vins():
     # Consultamos solo la columna 'vin' de todos los registros
-    # Test es el nombre de tu modelo (asegúrate de que tenga el atributo 'vin')
     results = db.session.query(Test.vin).all()
     
     # Convertimos la lista de tuplas [(vin1,), (vin2,)] en una lista plana [vin1, vin2]
