@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [message, setMessage] = useState("Loading...");
   const [addStatus, setAddStatus] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://flask-backend-1a0n.onrender.com/api")
@@ -29,6 +32,13 @@ function App() {
     }
   };
 
+  const handleSectionChange = (e) => {
+    const section = e.target.value;
+    if (section) {
+      navigate(`/section/${section}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
       {/* Floating Pills */}
@@ -41,18 +51,39 @@ function App() {
         <div className="mb-4 inline-flex items-center justify-center bg-white/10 px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm border border-white/10">
           🔌 Connected to Flask Backend: <span className="ml-2 text-green-400">{message}</span>
         </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-loose">
-            <span className="block text-white pb-3">Deploy Your</span>
-            <span
-              style={{ fontFamily: 'Pacifico, cursive' }}
-              className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text text-5xl sm:text-6xl md:text-7xl pb-8"
-            >
-              Flask + React App
-            </span>
-          </h1>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-loose">
+          <span className="block text-white pb-3">Deploy Your</span>
+          <span
+            style={{ fontFamily: 'Pacifico, cursive' }}
+            className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text text-5xl sm:text-6xl md:text-7xl pb-8"
+          >
+            Flask + React App
+          </span>
+        </h1>
         <p className="text-gray-400 text-lg">
           Build powerful full-stack apps with Flask and React. Deploy effortlessly on Vercel with zero server stress.
         </p>
+        
+        {/* Section Dropdown */}
+        <div className="mt-8">
+          <select
+            value={selectedSection}
+            onChange={handleSectionChange}
+            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hover:bg-white/20 transition cursor-pointer"
+          >
+            <option value="" className="bg-gray-900">Select a Section</option>
+            <option value="a" className="bg-gray-900">Section A</option>
+            <option value="b" className="bg-gray-900">Section B</option>
+            <option value="c" className="bg-gray-900">Section C</option>
+            <option value="d" className="bg-gray-900">Section D</option>
+            <option value="e" className="bg-gray-900">Section E</option>
+            <option value="f" className="bg-gray-900">Section F</option>
+            <option value="g" className="bg-gray-900">Section G</option>
+            <option value="h" className="bg-gray-900">Section H</option>
+            <option value="i" className="bg-gray-900">Section I</option>
+            <option value="j" className="bg-gray-900">Section J</option>
+          </select>
+        </div>
         
         {/* Add Model Button */}
         <div className="mt-8">
