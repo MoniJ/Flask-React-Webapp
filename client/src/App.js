@@ -21,7 +21,7 @@ function App() {
   const handleAddModel = async () => {
     const randomString = generateRandomString();
     setAddStatus("Adding...");
-    
+
     try {
       await fetch(`https://flask-backend-1a0n.onrender.com/add/${randomString}`);
       setAddStatus(`✓ Added: ${randomString}`);
@@ -87,6 +87,17 @@ function App() {
         
         {/* Add Model Button */}
         <div className="mt-8">
+          <div className="mb-4 inline-block text-left">
+            <label className="block text-sm text-gray-300 mb-1">Sección</label>
+            <select
+              value={section}
+              onChange={(e) => setSection(e.target.value)}
+              className="bg-white/5 text-white px-3 py-2 rounded-md border border-white/10"
+            >
+              <option>Seccion A</option>
+              <option>Seccion B</option>
+            </select>
+          </div>
           <button
             onClick={handleAddModel}
             className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transform transition hover:scale-105"
